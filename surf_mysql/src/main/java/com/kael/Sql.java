@@ -106,7 +106,7 @@ public class Sql {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			return DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/t_db", "root", "root");
+					"jdbc:mysql://localhost:3306/t_db", "", "");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
