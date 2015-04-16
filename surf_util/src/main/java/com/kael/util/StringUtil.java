@@ -29,10 +29,59 @@ public class StringUtil {
 		return new String(cs);
 	}
 
-	public static void main(String[] args) {
-		int c = 5;
-		while(c-- >= 0){
-			System.out.println(rand(10, RndType.ONLY_NUMBERS));
-		}
+	/**
+	 * 
+	 * @param phoneNum 传入的参数仅仅是一个电话号码时，调用此方法
+	 * @return 如果匹配正确，return true , else return else
+	 */
+	//如果传进来的是电话号码，则对电话号码进行正则匹配
+	public static boolean regexPhoneNumber(String phoneNum){
+		//电话号码匹配结果
+		return phoneNum != null && phoneNum.matches("1[358]\\d{9}");
+	}
+	
+	/**
+	 * 
+	 * @param email 传入的参数仅仅是一个邮箱地址时，调用此方法
+	 * @return  如果匹配正确，return true , else return false
+	 */
+	//如果传进来的是邮箱地址，则对邮箱进行正则匹配
+	public static boolean regexEmailAddress(String email){
+		
+		//邮箱匹配结果
+		return email != null && email.matches("[a-zA-Z_0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z]{2,}){1,3}");
+	}
+	
+	/**
+	 * 
+	 * @param phoneNum  传入的电话号码
+	 * @param email     传入的邮箱地址
+	 * @return   如果匹配正确，return true , else return false
+	 */
+	public static boolean regexEmailAddressAndPhoneNum(String phoneNum , String email){
+		return regexPhoneNumber(phoneNum) && regexEmailAddress(email);
+	}
+	
+	/**
+	 * 
+	 * @param qqNum 传入的QQ
+	 * @return  如果匹配正确，return true， else  return false
+	 */
+	public static boolean regexQQNumber(String qqNum){
+		
+		//QQ号匹配结果
+		return qqNum != null && qqNum.matches("[1-9]\\d{2,11}");
+	}
+	
+	/**
+	 * 
+	 * @param pwd 传入的是 密码
+	 * @return 如果匹配正确，满足密码规则，return true， else return false
+	 */
+	public static boolean regexPassWord(String pwd){
+		
+		//密码匹配结果
+		return pwd != null && pwd.matches("[0-9a-zA-Z_@$@]{6,12}");
+		
 	}
 }
