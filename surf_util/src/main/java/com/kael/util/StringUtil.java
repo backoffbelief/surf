@@ -17,6 +17,10 @@ public class StringUtil {
 		ONLY_NUMBERS,
 		COMPLEX_NUM_LETTER;
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(rand(10, RndType.LETTERS));
+	}
 
 	static String rand(int len, RndType rt) {
 		char[] cs = new char[len];
@@ -27,6 +31,9 @@ public class StringUtil {
 				break;
 			case ONLY_UPPER:
 				cs[i] = (char) RandUtil.rand('A', 'Z' + 1);
+				break;
+			case LETTERS:
+				cs[i] = (char) RandUtil.rand('A', 'z' + 1);
 				break;
 			case ONLY_NUMBERS:
 				cs[i] = (char) RandUtil.rand('0', '9' + 1);
