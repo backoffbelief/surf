@@ -12,7 +12,6 @@ import com.kael.extractor.html.HtmlFetcher;
  *
  * 使用HtmlUnit获取页面内容，HtmlUnit能执行JS
  * 动态渲染网页，但不是所有JS都能渲染，需要测试
- * @author 杨尚川
  */
 public class HtmlUnitHtmlFetcher implements HtmlFetcher {
     private static final Logger LOGGER = LoggerFactory.getLogger(HtmlUnitHtmlFetcher.class);

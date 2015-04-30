@@ -16,8 +16,6 @@ import com.kael.extractor.html.model.CssPath;
  * 2、removeText(作者：)
  * 3、substring(0,19) 抽取函数的格式为：函数名称+(+逗号分割的参数+)
  *
- * @author 杨尚川
- *
  */
 public class ExtractFunctionExecutor {
     public static final Logger LOGGER = LoggerFactory.getLogger(ExtractFunctionExecutor.class);
