@@ -9,7 +9,6 @@ import java.util.Map;
 import net.sf.cglib.reflect.FastClass;
 import net.sf.cglib.reflect.FastMethod;
 
-import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 
 import com.google.protobuf.Descriptors.FieldDescriptor;
@@ -29,21 +28,14 @@ public class CmdDispatcher {
 
     private ApplicationContext ac;
 
-    private static final Logger logger = Logger.getLogger("synfight");
-
     private final CmdsConfig cmdsConfig;
-
-//    private SynRoomBusinessThreadPool businessThreadPool;
 
     private GlobalBusinessThreadPool globalThreadPool;
 
-//    private ExceptionHandler exceptionHandler;
 
-    public CmdDispatcher(CmdsConfig cmdsConfig,/** SynRoomBusinessThreadPool businessThreadPool,*/ GlobalBusinessThreadPool globalThreadPool/**, ExceptionHandler exceptionHandler*/) {
+    public CmdDispatcher(CmdsConfig cmdsConfig, GlobalBusinessThreadPool globalThreadPool/**, ExceptionHandler exceptionHandler*/) {
         this.cmdsConfig = cmdsConfig;
-//        this.businessThreadPool = businessThreadPool;
         this.globalThreadPool = globalThreadPool;
-//        this.exceptionHandler = exceptionHandler;
     }
 
     /**
@@ -66,7 +58,7 @@ public class CmdDispatcher {
             String methodName = cmdProperties.getMethodName();
             Object service = ac.getBean(serviceName);
             if (service == null) {
-                logger.error("init cmd.xml'serviceMethod definition, but can't find the service: serviceName = "
+            	System.err.println("init cmd.xml'serviceMethod definition, but can't find the service: serviceName = "
                         + serviceName + ", methodName = " + methodName);
                 throw new Error("init cmd.xml'serviceMethod definition, but can't find the service: serviceName = "
                         + serviceName + ", methodName = " + methodName);
@@ -90,7 +82,7 @@ public class CmdDispatcher {
                 }
             }
             if (!hadFind) {
-                logger.error("init cmd.xml'serviceMethod definition, but can't find the method: serviceName = "
+                System.err.println("init cmd.xml'serviceMethod definition, but can't find the method: serviceName = "
                         + serviceName + ", methodName = " + methodName);
                 throw new Error("init cmd.xml'serviceMethod definition, but can't find the method: serviceName = "
                         + serviceName + ", methodName = " + methodName);
@@ -117,6 +109,7 @@ public class CmdDispatcher {
                         dispatch0(msg, cmdProperties, player);
                     } catch (Throwable e) {
 //                        exceptionHandler.handleException(e, player.getChannelHandlerCtx());
+                    	e.printStackTrace();
                     }
                 }
             });
@@ -157,7 +150,7 @@ public class CmdDispatcher {
         MethodInvoker methodInvoker = methodInvokersMap.get(key);
 
         if (methodInvoker == null) {
-            logger.error("Can't find the method: serviceName = " + serviceName + ", methodName = " + methodName
+            System.err.println("Can't find the method: serviceName = " + serviceName + ", methodName = " + methodName
                     + ", protoName = " + proto.getClass().getSimpleName() + ", paraNum = " + fields.size());
         }
 

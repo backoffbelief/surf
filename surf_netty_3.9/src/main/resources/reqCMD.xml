@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <CommandTypes>
 	<CommandType>
-		<ID>100</ID>
+		<ID>1</ID>
 		<ProtoName>com.kael.surf.ReqProtocolBuffer$ReqUserInfo</ProtoName>
 		<Service>userService</Service>
 		<Method>getUserInfo</Method>

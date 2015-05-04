@@ -46,20 +46,4 @@ public class ReqCmdProperties {
         return defaultInstance;
     }
 
-//    public CmdDomain getCmdDomain() {
-//        return cmdDomain;
-//    }
-//
-//    public boolean isGlobalCmd() {
-//        return cmdDomain == CmdDomain.global;
-//    }
-//
-//    public boolean isSynRoomCmd() {
-//        return cmdDomain == CmdDomain.synRoom;
-//    }
-//    
-//    public boolean isDirectCmd() {
-//        return cmdDomain == CmdDomain.direct;
-//    }
-
 }
