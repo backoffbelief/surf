@@ -3,11 +3,15 @@ package com.kael.surf.net;
 public class IMessage {
 	private IMessage() {
 	}
+	
+	public static Builder create(){
+		return new Builder();
+	}
 
 	public static class Builder{
 		private final IMessage msg;
 
-		public Builder() {
+		private Builder() {
 			msg = new IMessage();
 		}
 		
@@ -19,6 +23,10 @@ public class IMessage {
 		public Builder setBody(byte[] body) {
 			msg.body = body;
 			return this;
+		}
+		
+		public IMessage build(){
+			return msg;
 		}
 	}
 	
