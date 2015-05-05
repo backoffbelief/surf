@@ -28,7 +28,7 @@ public class KProtobufEncoder extends MessageToMessageEncoder<Object>{
 			return ;
 		}
 		
-		throw new RuntimeException("unsupport class:"+msg.getClass().getName());
+		throw new RuntimeException("unsupport encode class:"+msg.getClass().getName());
 		
 	}
 

@@ -40,6 +40,18 @@ public class AppExecutors {
 		}
 	}
 	
+	public void checkinDelayTask(DelayAppTask delayAppTask) {
+		configureDelayThread();
+		checkThread.checkin(delayAppTask);
+		
+	}
+	
+	public void stop(){
+		if(checkThread != null){
+			checkThread.stopMe();
+		}
+	}
+	
 	
 	static class DelayCheckThread extends Thread{
 		private static final int ZIZZ_TIME = 80;
@@ -76,7 +88,7 @@ public class AppExecutors {
                     long interval = System.currentTimeMillis() - start;
                     zizzTime -= interval;
                     if (interval > ZIZZ_TIME) {
-                        //logger.warn(getName() + " is spent too much time: " + interval + "ms, checked num = " + checked);
+                        System.out.println(getName() + " is spent too much time: " + interval + "ms, checked num = " + checked);
                     }
                 }
                 
@@ -131,5 +143,6 @@ public class AppExecutors {
         }
 	
 	}
+
 
 }

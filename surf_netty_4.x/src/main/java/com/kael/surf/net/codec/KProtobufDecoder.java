@@ -18,7 +18,7 @@ public class KProtobufDecoder extends MessageToMessageDecoder<Object> {
 				out.add(msg);
 				return ;
 			}
-			throw new RuntimeException("unsupport java class: "+msg.getClass().getName());
+			throw new RuntimeException("unsupport decode java class: "+msg.getClass().getName());
 		}
 		
 		ByteBuf tmp = (ByteBuf) msg;

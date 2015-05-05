@@ -24,11 +24,8 @@ public class AppQueue {
 		}
 	}
 
-	public void checkinDelayTask(AppTask appTask){
-		this.tasks.offer(appTask);
-		if(this.running.compareAndSet(false, true)){
-			execute();
-		}
+	public void checkinDelayTask(DelayAppTask appTask){
+		appExecutors.checkinDelayTask(appTask);
 	}
 	
 	public void checkout(){

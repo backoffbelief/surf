@@ -2,7 +2,7 @@ package com.kael.surf.net;
 
 import com.kael.surf.muti.AppTask;
 
-public class AppNetTask<T extends AppPlayer,N extends AbstractCommand> extends AppTask {
+public class AppNetTask<T extends AppPlayer,N extends AbstractCommand<T>> extends AppTask {
 	private final T player;
 	private final N cmd;
 	private final IMessage msg;
