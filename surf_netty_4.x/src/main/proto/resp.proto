@@ -1,0 +1,6 @@
+option java_package = "com.kael.surf";
+option java_outer_classname = "RespProtocolBuffer";
+
+message RespUserInfo{
+   optional int32 id =1;
+}
