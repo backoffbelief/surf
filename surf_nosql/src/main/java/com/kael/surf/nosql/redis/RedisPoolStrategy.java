@@ -3,7 +3,7 @@ package com.kael.surf.nosql.redis;
 public interface RedisPoolStrategy {
 
 	
-	SharedJRedisPool select(byte[] key);
+	JRedis select(byte[] key);
 	
-	SharedJRedisPool select(String key);
+	JRedis select(String key);
 }
