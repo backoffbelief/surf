@@ -15,6 +15,12 @@ public interface JRedis {
 	
 	Long dbsize();
 	
+	/**
+	 * get unix time stamp of last successful save to disk
+	 * @return
+	 */
+	long lastsave();
+	
 	//事务
 	void muti(String key);
 	
@@ -38,8 +44,18 @@ public interface JRedis {
 
 	Long decrby(byte[] key, int decrment);
 	
+	/**
+	 * jRedisProxy 不能使用
+	 * @param keys
+	 * @return
+	 */
 	Long del(String... keys);
 	
+	/**
+	 * jRedisProxy 不能使用
+	 * @param keys
+	 * @return
+	 */
 	Long del(byte[]... keys);
 	
 	boolean exists(String key);
@@ -86,12 +102,12 @@ public interface JRedis {
 	
 	long ttl(byte[] key);
 	
-	/**
+	/**jRedisProxy 不能使用
 	 * remove all keys from all db
 	 */
 	String flushAll();
 
-	/**
+	/**jRedisProxy 不能使用
 	 * remove all keys from current db
 	 */
 	String flushDB();
@@ -164,7 +180,7 @@ public interface JRedis {
 	
 	Map<byte[], byte[]> hgetAll(byte[] key);
 	
-	Long hincrby(byte[] key,byte[] field,int increment);
+	Long hincrBy(byte[] key,byte[] field,int increment);
 	
 	double hincrByFloat(byte[] key,byte[] field, double increment);
 	
@@ -244,29 +260,48 @@ public interface JRedis {
 	
 	Double incrByFloat(byte[] key,double increment);
 
+	/**
+	 * jRedisProxy 不能使用
+	 * @param pattern
+	 * @return
+	 */
 	Set<String> keys(String pattern);
 
+	/**
+	 * jRedisProxy 不能使用
+	 * @param pattern
+	 * @return
+	 */
 	Set<byte[]> keys(byte[] pattern);
 	
 	List<String> mget(String... keys);
-	
+	/**
+	 * jRedisProxy 不能使用
+	 * @param keysvalues
+	 * @return
+	 */
 	String mset(String... keysvalues);
-	
+	/**
+	 * jRedisProxy 不能使用
+	 * @param msetnx
+	 * @return
+	 */
 	Long msetnx(String... msetnx);
 
 	
 	List<byte[]> mget(byte[]... keys);
-	
-	String mset(byte[]... keysvalues);
-	
-	Long msetnx(byte[]... msetnx);
-	
 	/**
-	 * get unix time stamp of last successful save to disk
+	 * jRedisProxy 不能使用
+	 * @param keysvalues
 	 * @return
 	 */
-	long lastsave();
-	
+	String mset(byte[]... keysvalues);
+	/**
+	 * jRedisProxy 不能使用
+	 * @param msetnx
+	 * @return
+	 */
+	Long msetnx(byte[]... msetnx);
 	
 	//list
 	String lindex(String key,long index);
@@ -452,7 +487,7 @@ public interface JRedis {
 
 	Long zremrangeByRank(byte[] key, int start, int end);
 
-	Long zremrangebyscore(byte[] key, double start, double end);
+	Long zremrangeByScore(byte[] key, double start, double end);
 
 	Set<byte[]> zrevrange(byte[] key, int start, int end);
 

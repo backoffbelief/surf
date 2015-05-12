@@ -14,4 +14,17 @@ public class JRedisFactory {
 		config.testWhileIdle = true;
 		return config;
 	}
+	
+	public static JRedis createJredis(String masters,String slaves){
+		
+		Config initConfig = initConfig();
+		String[] split = masters.split(",");
+		JRedisProxy jRedisProxy = new JRedisProxy(split.length);
+		for(String master : split){
+			String[] tmp = master.split(":");
+			JRedisImpl jRedisImpl = new JRedisImpl(new SharedRedisInfo(tmp[0], tmp[1], tmp[1]), initConfig);
+			jRedisProxy.addJRedis(jRedisImpl);
+		}
+		return jRedisProxy;
+	}
 }
