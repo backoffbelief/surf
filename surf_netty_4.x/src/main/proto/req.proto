@@ -1,8 +1,0 @@
-option java_package = "com.kael.surf";
-option java_outer_classname = "ReqProtocolBuffer";
-
-message ReqUserInfo{
-
-   optional string username =1;
-   optional int32 level = 2;
-}
