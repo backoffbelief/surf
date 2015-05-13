@@ -56,5 +56,10 @@
 			<artifactId>commons-pool</artifactId>
 			<version>1.6</version>
 		</dependency>
+		<dependency>
+			<groupId>com.whalin</groupId>
+			<artifactId>Memcached-Java-Client</artifactId>
+			<version>3.0.2</version>
+		</dependency>
 	</dependencies>
 </project>
