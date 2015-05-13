@@ -4,19 +4,12 @@ import io.netty.util.AttributeKey;
 
 public interface Constants {
 	
+	Constants constants = new Constants(){};
+	
 	AttributeKey<AppPlayer> playerKey = AttributeKey.valueOf("player");
-	/**
-	@Resp(protoName="dddddddddddd")
-	short Send_User_Info = 100;
-	@Resp(protoName="dddddddddddd0")
-	short Send_User_Info0 = 105;
-	@Resp(protoName="dddddddddddd1")
-	short Send_User_Info1 = 104;
-	@Resp(protoName="dddddddddddd2")
-	short Send_User_Info2 = 103;
-	@Resp(protoName="dddddddddddd3")
-	short Send_User_Info3 = 102;
-	@Resp(protoName="dddddddddddd4")
-	short Send_User_Info4 = 101;
-	*/
+	
+	short client_req_login = 1;
+	
+	@Resp(protoName="com.kael.surf.RespProtocolBuffer$RespUserInfo")
+	short server_resp_login = 101;
 }

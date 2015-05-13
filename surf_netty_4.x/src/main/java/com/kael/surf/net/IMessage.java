@@ -1,5 +1,7 @@
 package com.kael.surf.net;
 
+import com.google.protobuf.Message;
+
 public class IMessage {
 	private IMessage() {
 	}
@@ -22,6 +24,13 @@ public class IMessage {
 
 		public Builder setBody(byte[] body) {
 			msg.body = body;
+			return this;
+		}
+		
+		public Builder withBody(Message.Builder builder){
+		    Message m =  builder.build();
+		    
+		    
 			return this;
 		}
 		
