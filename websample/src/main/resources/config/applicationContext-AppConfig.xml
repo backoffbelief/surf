@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<<!DOCTYPE aop:aspectj-autoproxy PUBLIC "//UNKNOWN/" "unknown.dtd">
+<aop:aspectj-autoproxy proxy-target-class="true" />  
+      
+    <context:component-scan base-package="web.function">  
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>  
+    </context:component-scan>  
+      
+      
+    <import resource="classpath:config/context/applicationContext-CachingConfig.xml" />  
+    <import resource="classpath:config/context/applicationContext-DaoConfig.xml" />  
