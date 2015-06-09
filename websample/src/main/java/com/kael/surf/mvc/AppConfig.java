@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.Controller;
 @Configuration
 @ComponentScan(basePackages = "com.kael" , excludeFilters ={@ComponentScan.Filter(type= FilterType.ANNOTATION,value = {Controller.class})})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@Import({})
+@Import({CachingConfig.class,DaoConfig.class})
 public class AppConfig {
 
 }
