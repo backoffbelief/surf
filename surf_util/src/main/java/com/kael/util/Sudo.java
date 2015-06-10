@@ -1,210 +1,131 @@
 package com.kael.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+
 
 public class Sudo {
 	
-	static final int[][] sudoArray = {
-			{ 0, 0, 0, 2, 0, 9, 0, 4, 0 },
-			{ 5, 0, 0, 0, 7, 0, 9, 0, 2 }, 
-			{ 7, 9, 0, 0, 6, 0, 1, 0, 0 },
-			{ 0, 0, 0, 7, 8, 0, 0, 0, 9 }, 
-			{ 0, 2, 8, 6, 0, 3, 4, 7, 0 },
-			{ 9, 0, 0, 0, 2, 5, 0, 0, 0 }, 
-			{ 0, 0, 4, 0, 5, 0, 0, 1, 6 },
-			{ 2, 0, 9, 0, 4, 0, 0, 0, 3 }, 
-			{ 0, 6, 0, 1, 0, 7, 0, 0, 0 },	
-		}; 
-	static final int totalSum = 405;
-	
-	static int totalVar= 0;
-	
-	static class P{
-		final int i,j;
-
-		public P(int i, int j) {
-			super();
-			this.i = i;
-			this.j = j;
-		}
-	}
-	
-	static class V{
-		final int i,j;
-		int[] pros ;
-		public V(int i, int j) {
-			super();
-			this.i = i;
-			this.j = j;
-		}
-
-		public V(int i, int j,int[] pros) {
-			super();
-			this.i = i;
-			this.j = j;
-			this.pros = pros;
-		}
-		
-		public void setPros(int[] pros) {
-			this.pros = pros;
-		}
-
-		public boolean remove(int v){
-			try {
-				pros = ArrayUtils.remove(pros, Arrays.binarySearch(pros, v));
-			} catch (Exception e) {
-			}
-			return isOnlyOne();
-		}
-
-		boolean isOnlyOne(){
-			return pros.length == 1;
-		}
-
-		boolean isEmpty(){
-			return pros.length == 0;
-		}
-
-		@Override
-		public String toString() {
-			return String.format("V [i=%s, j=%s, pros=%s]", i, j,
-					Arrays.toString(pros));
-		}
-		
-		
-	}
+	static final int[] orginalTmps = {1,2,3,4,5,6,7,8,9};
+	static final int LEN = 9;
 	
 	public static void main(String[] args) {
-		List<V> vs = new ArrayList<Sudo.V>();
-//		boolean first = true;
-		//while(totalVar < totalSum){
-			
-			for(int i = 0; i< sudoArray.length;i++){
-				for (int j = 0; j < sudoArray[i].length; j++) {
-					if(sudoArray[i][j] == 0){
-						V e ;
-						if(null !=(e = add(i, j))){
-							vs.add(e);
-						}else{
-							remove(i, j, sudoArray[i][j], vs);
-						}
-//					}else{
-//						if(first)
-//							totalVar += sudoArray[i][j];
-					}
-				}
-			}
-			//first = false;
-		//}
-			
-			
+		int[][] sudoArray = {
+				{ 0, 0, 0, 2, 0, 9, 0, 4, 0 },
+				{ 5, 0, 0, 0, 7, 0, 9, 0, 2 }, 
+				{ 7, 9, 0, 0, 6, 0, 1, 0, 0 },
+				{ 0, 0, 0, 7, 8, 0, 0, 0, 9 }, 
+				{ 0, 2, 8, 6, 0, 3, 4, 7, 0 },
+				{ 9, 0, 0, 0, 2, 5, 0, 0, 0 }, 
+				{ 0, 0, 4, 0, 5, 0, 0, 1, 6 },
+				{ 2, 0, 9, 0, 4, 0, 0, 0, 3 }, 
+				{ 0, 6, 0, 1, 0, 7, 0, 0, 0 },	
+			}; 
 		
-//		for(int[] arr :sudoArray){
-//			System.out.println(Arrays.toString(arr));
-//		}
-
-		while(!vs.isEmpty()){
-			for(Iterator<V> iterator = vs.iterator();iterator.hasNext();){
-				V next = iterator.next();
-				if(next.isOnlyOne()){
-					iterator.remove();
-				}
-				
-			}
-		}
-	
-	}
-	
-	static final int[] orginalTmps = {1,2,3,4,5,6,7,8,9};
-	
-	static V add(int x, int y){
-		int[] localTmp = Arrays.copyOf(orginalTmps, orginalTmps.length);
-		for(int i = 0 ;i < 9 ;i++){
-			if (sudoArray[i][y] != 0) {
-//				sets.add(sudoArray[i][v.j]);
-				try {
-					localTmp = ArrayUtils.remove(localTmp, Arrays.binarySearch(localTmp, sudoArray[i][y]));
-				} catch (Exception e) {
-					continue;
-				}
-			}
-		}
-
-		for(int i = 0 ;i < 9 ;i++){
-			if (sudoArray[x][i] != 0) {
-//				sets.add(sudoArray[v.i][i]);
-				try {
-					localTmp = ArrayUtils.remove(localTmp, Arrays.binarySearch(localTmp, sudoArray[x][i]));
-				} catch (Exception e) {
-					//e.printStackTrace();
-					continue;
-				}
-			}
-		}
-		int startI = (x/3)*3;
-		int startJ = (y/3)*3;
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				if (sudoArray[i + startI ][j + startJ] != 0) {
-//					sets.add(sudoArray[i + startI][j + startJ]);
-					try {
-						localTmp = ArrayUtils.remove(localTmp, Arrays.binarySearch(localTmp, sudoArray[i + startI][j + startJ]));
-					} catch (Exception e) {
+		ConcurrentHashMap<Integer,int[]> arrMaps = new ConcurrentHashMap<Integer,int[]>();
+		for (int i = 0; i < LEN; i++) {
+			for (int j = 0; j < LEN; j++) {
+				if(sudoArray[i][j] == 0 ){
+					//arrMaps.put(key, value);
+					int[] localTmp = Arrays.copyOf(orginalTmps, orginalTmps.length);
+					boolean over = false;
+					for(int x = 0; x < LEN ;x ++){
+						if(sudoArray[x][j] != 0){
+							localTmp = remove(localTmp, sudoArray[x][j]);
+							if(localTmp.length == 1){
+								sudoArray[i][j] = localTmp[0];
+								refresh(sudoArray,arrMaps,i,j);
+								over = true;
+								break;
+							}
+						}
+					}
+					if(over){
 						continue;
 					}
+					
+					for(int x = 0; x < LEN ;x ++){
+						if(sudoArray[i][x] != 0){
+							localTmp = remove(localTmp, sudoArray[i][x]);
+							if(localTmp.length == 1){
+								sudoArray[i][j] = localTmp[0];
+								over = true;
+								refresh(sudoArray,arrMaps,i,j);
+								break;
+							}
+						}
+					}
+					if(over){
+						continue;
+					}
+					
+					for (int x = i / 3 * 3; x < i / 3 * 3 + LEN / 3; x++) {
+						for (int y = j / 3 * 3; y < j / 3 * 3 + LEN / 3; y++) {
+							if (x != i && j != y && sudoArray[x][y] != 0) {
+								localTmp = remove(localTmp, sudoArray[x][y]);
+								if (localTmp.length == 1) {
+									sudoArray[i][j] = localTmp[0];
+									over = true;
+									refresh(sudoArray, arrMaps, i, j);
+									break;
+								}
+							}
+						}
+					}
+					if(over){
+						continue;
+					}
+					
+					arrMaps.put(i * 9 + j, localTmp);
 				}
 			}
 		}
-//		Integer[] tmp = sets.toArray(new Integer[0]);
-		if(localTmp.length == 1){
-			sudoArray[x][y] = localTmp[0];
-			totalVar += sudoArray[x][y];
-			return null;
-		}
-		return new V(x, y,localTmp);
+		
+		for(int[] arr : sudoArray)
+			System.out.println(Arrays.toString(arr));
+		
 	}
 	
-	static boolean remove(int x,int y,int v,List<V> vs){
-		if(vs.isEmpty()){
-			return false;
+	
+	private static void refresh(int[][] sudoArray, ConcurrentHashMap<Integer,int[]> arrMaps,
+			int i, int j) {
+		if(arrMaps.isEmpty()){
+			return ;
 		}
-		boolean flag = false;
-		for(Iterator<V> iterator = vs.iterator();iterator.hasNext();){
-			V e = iterator.next();
-			if(x == e.i){
-			    flag = refresh(iterator, e,v);
-			}else if(y == e.j ){
-				flag = refresh(iterator, e,v);
-			}else {
-				int startI = (x/3)*3;
-				int startJ = (y/3)*3;
+		for(Iterator<Entry<Integer,int[]>> iterator = arrMaps.entrySet().iterator();iterator.hasNext();){
+			Entry<Integer,int[]> next = iterator.next();
+			if(next != null){
+				int x = next.getKey()/9;
+				int y = next.getKey()%9;
+				int[] localTmp = next.getValue();
+				if(x == i){
+					localTmp = remove(localTmp, sudoArray[i][j]);
+				}else if(y == j){
+					localTmp = remove(localTmp, sudoArray[i][j]);
+				}else if(x/3 == i/3 && y/3 == j/3 ) {
+					localTmp = remove(localTmp, sudoArray[i][j]);
+				}
 				
-				if(e.i >= startI && e.i <= startI + 2 && e.j >= startJ && e.j <= startJ + 2){
-					flag = refresh(iterator, e,v);
+				if(localTmp.length == 1){
+					sudoArray[x][y] = localTmp[0];
+					iterator.remove();
+					refresh(sudoArray, arrMaps, x, y);
+				}else{
+//					next.value = localTmp;
+					arrMaps.put(next.getKey(), localTmp);
 				}
 			}
-			
 		}
-		return flag;
-	}
-	
-	
-	static void rm(List<V> rms,Iterator<V> iterator, V e,int v){
 	}
 
-	private static boolean refresh(Iterator<V> iterator, V e,int v) {
-		if(e.remove(v)){
-			sudoArray[e.i][e.j] = e.pros[0];
-			totalVar += sudoArray[e.i][e.j];
-			iterator.remove();
+
+	static int[] remove(int[] array ,int toRemove){
+		int tmp;
+		if ((tmp = Arrays.binarySearch(array, toRemove)) >= 0) {
+			return ArrayUtils.remove(array, tmp);
 		}
-		return true;
+		return array;
 	}
-	
-	
 }
